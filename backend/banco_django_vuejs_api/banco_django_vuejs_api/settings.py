@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'markdown',
-    'rest_framework'
+    'rest_framework',
+    'banco'
 ]
 
 MIDDLEWARE = [
