@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./backend
+    user: "${UID}:${GID}"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: postgres:13.2-alpine
+    volumes:
+      - ./backend/.docker/dbdata:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=banco_django_vuejs
+
+volumes:
+  postgres_data:
