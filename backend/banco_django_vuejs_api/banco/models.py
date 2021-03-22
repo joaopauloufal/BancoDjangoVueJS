@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Banco(models.Model):
-    codigo_banco = models.CharField(verbose_name='Código do Banco', max_length=20)
+    codigo_banco = models.CharField(verbose_name='Código do Banco', max_length=20, unique=True)
     nome = models.CharField(verbose_name='Nome', max_length=120)
 
     class Meta:
