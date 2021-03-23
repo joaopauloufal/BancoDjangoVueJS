@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import Banco, Agencia
-from .serializers import BancoSerializer, AgenciaSerializer
+from .models import Banco, Agencia, Cliente
+from .serializers import BancoSerializer, AgenciaSerializer, ClienteSerializer
 
 
 class BancoViewSet(viewsets.ModelViewSet):
@@ -19,3 +19,8 @@ class BancoViewSet(viewsets.ModelViewSet):
 class AgenciaViewSet(viewsets.ModelViewSet):
     queryset = Agencia.objects.all()
     serializer_class = AgenciaSerializer
+
+
+class ClienteViewSet(viewsets.ModelViewSet):
+    queryset = Cliente.objects.all()
+    serializer_class = ClienteSerializer

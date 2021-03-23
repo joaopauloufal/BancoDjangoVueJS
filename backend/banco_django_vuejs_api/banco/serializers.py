@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Banco, Agencia
+from .models import Banco, Agencia, Cliente
 
 
 class BancoSerializer(serializers.ModelSerializer):
@@ -12,3 +12,9 @@ class AgenciaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Agencia
         fields = ['id', 'nome', 'banco']
+
+
+class ClienteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        fields = ['id', 'nome', 'cpf_cnpj']
