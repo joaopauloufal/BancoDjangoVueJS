@@ -45,7 +45,7 @@ class Conta(models.Model):
     )
 
     numero = models.CharField(verbose_name='Número', max_length=80)
-    saldo = models.DecimalField(verbose_name='Saldo', decimal_places=10, default=0.00, max_digits=19)
+    saldo = models.DecimalField(verbose_name='Saldo', decimal_places=2, default=0.00, max_digits=19)
     agencia = models.ForeignKey(Agencia, verbose_name='Agência', on_delete=models.PROTECT, related_name='contas')
     cliente = models.ForeignKey(Cliente, verbose_name='Cliente', on_delete=models.PROTECT, related_name='contas')
     tipo = models.CharField(verbose_name='Tipo', max_length=15, choices=TIPOS_CONTA)
