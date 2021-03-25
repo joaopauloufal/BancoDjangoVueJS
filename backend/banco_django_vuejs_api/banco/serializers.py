@@ -11,7 +11,7 @@ class BancoSerializer(serializers.ModelSerializer):
 class AgenciaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Agencia
-        fields = ['id', 'nome', 'banco']
+        fields = ['id', 'nome', 'banco', 'codigo_agencia']
 
 
 class ClienteSerializer(serializers.ModelSerializer):
@@ -21,12 +21,10 @@ class ClienteSerializer(serializers.ModelSerializer):
 
 
 class ContaSerializer(serializers.ModelSerializer):
-    cliente = ClienteSerializer(read_only=True)
-    agencia = AgenciaSerializer(read_only=True)
 
     class Meta:
         model = Conta
-        fields = ['id', 'numero', 'tipo', 'cliente', 'agencia', 'saldo']
+        fields = ['id', 'numero', 'tipo', 'cliente', 'saldo', 'agencia']
 
 
 class ContaDepositoSerializer(serializers.Serializer):

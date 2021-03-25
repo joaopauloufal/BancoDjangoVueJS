@@ -1,4 +1,4 @@
-from rest_framework import viewsets, response, status, serializers
+from rest_framework import viewsets, response, status, serializers, filters
 from rest_framework.decorators import action
 from .models import Banco, Agencia, Cliente, Conta
 from .serializers import (
@@ -12,6 +12,8 @@ from django.db.transaction import atomic
 class BancoViewSet(viewsets.ModelViewSet):
     queryset = Banco.objects.all()
     serializer_class = BancoSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['codigo_banco', 'nome']
 
     @action(detail=True, methods=['get'], serializer_class=AgenciaSerializer)
     def agencias(self, request, *args, **kwargs):
@@ -23,6 +25,8 @@ class BancoViewSet(viewsets.ModelViewSet):
 class AgenciaViewSet(viewsets.ModelViewSet):
     queryset = Agencia.objects.all()
     serializer_class = AgenciaSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['nome', 'codigo_agencia']
 
     @action(detail=True, methods=['get'], serializer_class=ContaSerializer)
     def contas(self, request, *args, **kwargs):
@@ -34,6 +38,8 @@ class AgenciaViewSet(viewsets.ModelViewSet):
 class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['cpf_cnpj']
 
     @action(detail=True, methods=['get'], serializer_class=ContaSerializer)
     def contas(self, request, *args, **kwargs):
@@ -45,6 +51,8 @@ class ClienteViewSet(viewsets.ModelViewSet):
 class ContaViewSet(viewsets.ModelViewSet):
     queryset = Conta.objects.all()
     serializer_class = ContaSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['numero', 'cliente__cpf_cnpj']
 
     @atomic
     @action(detail=True, methods=['put'], serializer_class=ContaDepositoSerializer)
@@ -61,7 +69,7 @@ class ContaViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['put'], serializer_class=ContaSaqueSerializer)
     def sacar(self, request, *args, **kwargs):
         conta = self.get_object()
-        serializer = ContaDepositoSerializer(instance=conta, data=request.data)
+        serializer = ContaDepositoSerializer(data=request.data)
         if serializer.is_valid():
             valor = Decimal(serializer.data['valor'])
             if valor > conta.saldo:

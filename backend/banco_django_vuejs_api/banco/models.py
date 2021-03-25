@@ -14,12 +14,14 @@ class Banco(models.Model):
 
 
 class Agencia(models.Model):
+    codigo_agencia = models.CharField(verbose_name='Código da Agência', max_length=20)
     nome = models.CharField(verbose_name='Nome', max_length=120)
     banco = models.ForeignKey(Banco, verbose_name='Banco', on_delete=models.PROTECT, related_name='agencias')
 
     class Meta:
         ordering = ['nome']
         verbose_name = 'Agência'
+        unique_together = [['codigo_agencia', 'banco']]
 
     def __str__(self):
         return f'{self.id} - {self.nome}'
