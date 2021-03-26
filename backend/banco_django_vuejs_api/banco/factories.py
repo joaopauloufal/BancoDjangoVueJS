@@ -7,8 +7,8 @@ fake = Faker()
 
 class BancoFactory(factory.django.DjangoModelFactory):
 
-    nome = fake.name()
-    codigo_banco = fake.swift8()
+    nome = factory.Sequence(lambda n: fake.name())
+    codigo_banco = factory.Sequence(lambda n: fake.swift8())
 
     class Meta:
         model = Banco
@@ -16,8 +16,8 @@ class BancoFactory(factory.django.DjangoModelFactory):
 
 class AgenciaFactory(factory.django.DjangoModelFactory):
 
-    nome = fake.name()
-    codigo_agencia = fake.swift8()
+    nome = factory.Sequence(lambda n: fake.name())
+    codigo_agencia = factory.Sequence(lambda n: fake.swift8())
 
     class Meta:
         model = Agencia
