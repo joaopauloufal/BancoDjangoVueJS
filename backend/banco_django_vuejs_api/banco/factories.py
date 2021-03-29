@@ -21,13 +21,12 @@ class AgenciaFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Agencia
-        django_get_or_create = ('banco',)
 
 
 class ClienteFactory(factory.django.DjangoModelFactory):
 
-    nome = fake.name()
-    cpf_cnpj = factory.Sequence(lambda: fake.numerify('###.###.###-##'))
+    nome = factory.Sequence(lambda n: fake.name())
+    cpf_cnpj = factory.Sequence(lambda n: fake.numerify('###.###.###-##'))
 
     class Meta:
         model = Cliente
@@ -35,9 +34,9 @@ class ClienteFactory(factory.django.DjangoModelFactory):
 
 class ContaFactory(factory.django.DjangoModelFactory):
 
-    numero = fake.swift8()
-    saldo = fake.pyfloat(1, 2)
+    numero = factory.Sequence(lambda n: fake.swift8())
+    saldo = factory.Sequence(lambda n: fake.pyfloat(1, 2))
 
     class Meta:
         model = Conta
-        django_get_or_create = ('agencia', 'cliente', 'tipo', )
+        django_get_or_create = ('tipo', )
