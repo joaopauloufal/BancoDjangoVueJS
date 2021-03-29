@@ -18,6 +18,7 @@ class AgenciaFactory(factory.django.DjangoModelFactory):
 
     nome = factory.Sequence(lambda n: fake.name())
     codigo_agencia = factory.Sequence(lambda n: fake.swift8())
+    banco = factory.SubFactory(BancoFactory)
 
     class Meta:
         model = Agencia
@@ -36,6 +37,9 @@ class ContaFactory(factory.django.DjangoModelFactory):
 
     numero = factory.Sequence(lambda n: fake.swift8())
     saldo = factory.Sequence(lambda n: fake.pyfloat(1, 2))
+    tipo = 'FISICA'
+    agencia = factory.SubFactory(AgenciaFactory)
+    cliente = factory.SubFactory(ClienteFactory)
 
     class Meta:
         model = Conta
