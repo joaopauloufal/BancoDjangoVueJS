@@ -13,10 +13,10 @@
           paginated
           default-sort="nome"
         >
-          <b-table-column label="Código do Banco" field="codigo_banco" v-slot="props" sortable>
+          <b-table-column label="Código do Banco" field="codigo_banco" v-slot="props" sortable searchable>
             {{ props.row.codigo_banco }}
           </b-table-column>
-          <b-table-column label="Nome" field="nome" v-slot="props" sortable>
+          <b-table-column label="Nome" field="nome" v-slot="props" sortable searchable>
             {{ props.row.nome }}
           </b-table-column>
           <b-table-column label="Ações">
