@@ -2,7 +2,15 @@
   <section class="section">
     <div class="columns">
       <div class="column">
-        <b-button type="is-primary" class="is-pulled-right" icon-left="plus">Novo Banco</b-button>
+        <b-button
+          type="is-primary"
+          tag="router-link"
+          class="is-pulled-right"
+          icon-left="plus"
+          to="bancos/create"
+        >
+          Novo Banco
+        </b-button>
       </div>
     </div>
     <div class="columns">
